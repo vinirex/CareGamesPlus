@@ -1,35 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View, Text, Button, StyleSheet, Modal, TouchableWithoutFeedback } from "react-native";
 import { initAppleHealth, initGoogleFit, getDailySteps } from "../services/wearableApi";
+import { Header } from "@react-navigation/elements"; // or "@react-navigation/native-stack" if you use that
 
 export default function HomeScreen() {
     const [steps, setSteps] = useState<{ apple: number; google: number }>({ apple: 0, google: 0 });
+    const [modalVisible, setModalVisible] = useState(false);
 
     const connectWearables = async () => {
-
         await initAppleHealth();
         await initGoogleFit();
         const data = await getDailySteps();
         setSteps(data);
     };
 
-    const [modalVisible, setModalVisible] = useState(false);
-
-
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Care Games Plus</Text>
-            <Text style={styles.subtitle}>Resumo de Atividade</Text>
-            <Button title="Conectar Wearables" onPress={async () => {
-                try {
-                    setModalVisible(true);
-                    await connectWearables();
-                } catch (error) {
-                    console.error('Failed to connect wearables:', error);
-                    // Handle error appropriately
-                }
-            }} />
-
+            <Header
+                title="Care Games Plus"
+                headerTitleAlign="center"
+                headerStyle={styles.header}
+            />
+            <View style={styles.centerContent}>
+                <Text style={styles.subtitle}>Resumo de Atividade</Text>
+                <Button
+                    title="Conectar Wearables"
+                    onPress={async () => {
+                        try {
+                            setModalVisible(true);
+                            await connectWearables();
+                        } catch (error) {
+                            console.error('Failed to connect wearables:', error);
+                        }
+                    }}
+                />
+            </View>
             <Modal
                 animationType="fade"
                 transparent={true}
@@ -49,11 +54,15 @@ export default function HomeScreen() {
     );
 }
 
-
 const styles = StyleSheet.create({
-    container: { flex: 1, alignItems: "center" },
-    title: { fontSize: 36, fontWeight: "600", marginTop: 20 },
-    subtitle: { fontSize: 24, fontWeight: "600", marginBottom: 20, justifyContent: "center" },
+    container: { flex: 1, backgroundColor: "#fff" },
+    header: { backgroundColor: "#fff", elevation: 0 },
+    centerContent: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    subtitle: { fontSize: 24, fontWeight: "600", marginBottom: 20, textAlign: "center" },
     steps: { fontSize: 18, margin: 4, display: 'flex' },
     Button: { marginTop: 20 },
     modalOverlay: {
