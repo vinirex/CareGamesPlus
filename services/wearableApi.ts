@@ -49,3 +49,10 @@ export async function getDailySteps() {
     google: 9100,
   };
 }
+export async function getSleepData() {
+  // Mock de leitura até integração real
+  return {
+    apple: 6.5,
+    google: 7.2,
+  };
+}   
