@@ -4,11 +4,11 @@ import { View, Text, StyleSheet } from "react-native";
 export default function ReportsScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Relatórios Corporativos</Text>
+      <Text style={styles.title}>Rankings Corporativos</Text>
       <Text style={styles.text}>
         Aqui você verá insights agregados de bem-estar e produtividade da empresa.
       </Text>
-      <Text style={styles.placeholder}>📈 Gráficos e estatísticas em breve...</Text>
+      <Text style={styles.placeholder}>📈 Vamos ver quem são os Top Health do Mês...</Text>
     </View>
   );
 }

@@ -30,7 +30,7 @@ export default function App() {
               case "Benefícios":
                 iconName = "gift-outline";
                 break;
-              case "Relatórios":
+              case "Rankings":
                 iconName = "bar-chart-outline";
                 break;
               case "Perfil":
@@ -47,7 +47,7 @@ export default function App() {
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Desafios" component={ChallengesScreen} />
         <Tab.Screen name="Benefícios" component={BenefitsScreen} />
-        <Tab.Screen name="Relatórios" component={ReportsScreen} />
+        <Tab.Screen name="Rankings" component={ReportsScreen} />
         <Tab.Screen name="Perfil" component={ProfileScreen} />
       </Tab.Navigator>
     </NavigationContainer>

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { View, Text, Button, StyleSheet, Modal, TouchableWithoutFeedback } from "react-native";
-import { initAppleHealth, initGoogleFit, getDailySteps } from "../services/wearableApi";
+import { initGoogleFit, getDailySteps } from "../services/wearableApi";
 import { Header } from "@react-navigation/elements"; // or "@react-navigation/native-stack" if you use that
 
 export default function HomeScreen() {
-    const [steps, setSteps] = useState<{ apple: number; google: number }>({ apple: 0, google: 0 });
+    const [steps, setSteps] = useState<{ google: number }>({ google: 0 });
     const [modalVisible, setModalVisible] = useState(false);
 
     const connectWearables = async () => {
-        await initAppleHealth();
         await initGoogleFit();
         const data = await getDailySteps();
         setSteps(data);
@@ -45,7 +44,6 @@ export default function HomeScreen() {
                     <View style={styles.modalOverlay} />
                 </TouchableWithoutFeedback>
                 <View style={styles.modalContent}>
-                    <Text style={styles.steps}>Apple Health: {steps.apple} passos</Text>
                     <Text style={styles.steps}>Google Fit: {steps.google} passos</Text>
                     <Button title="Close" onPress={() => setModalVisible(false)} />
                 </View>

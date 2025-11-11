@@ -1,28 +1,4 @@
-import AppleHealthKit, {
-  HealthKitPermissions,
-} from "react-native-health";
 import GoogleFit, { Scopes } from "react-native-google-fit";
-
-export async function initAppleHealth() {
-  const permissions: HealthKitPermissions = {
-    permissions: {
-        read: [
-            AppleHealthKit.Constants.Permissions.StepCount,
-            AppleHealthKit.Constants.Permissions.DistanceWalkingRunning,
-            AppleHealthKit.Constants.Permissions.ActiveEnergyBurned,
-            AppleHealthKit.Constants.Permissions.SleepAnalysis,
-        ],
-        write: []
-    },
-  };
-
-  return new Promise((resolve, reject) => {
-    AppleHealthKit.initHealthKit(permissions, (error: string) => {
-      if (error) reject(error);
-      else resolve(true);
-    });
-  });
-}
 
 export async function initGoogleFit() {
   const options = {
@@ -45,14 +21,12 @@ export async function initGoogleFit() {
 export async function getDailySteps() {
   // Mock de leitura até integração real
   return {
-    apple: 8500,
     google: 9100,
   };
 }
 export async function getSleepData() {
   // Mock de leitura até integração real
   return {
-    apple: 6.5,
     google: 7.2,
   };
 }   
